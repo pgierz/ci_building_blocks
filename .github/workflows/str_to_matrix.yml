@@ -7,9 +7,9 @@ jobs:
     outputs:
       list_value: ${{ steps.split_comma_string.outputs.list_value }}
     steps:
-      split_comma_string:
-        - id: split_comma_string
-          run: echo "::set-output name=list_value::{\"include\":[{\"project\":\"foo\",\"config\":\"Debug\"},{\"project\":\"bar\",\"config\":\"Release\"}]}"
+      - split_comma_string:
+        id: split_comma_string
+        run: echo "::set-output name=list_value::{\"include\":[{\"project\":\"foo\",\"config\":\"Debug\"},{\"project\":\"bar\",\"config\":\"Release\"}]}"
             #run: echo "::set-output name=list_value::{\"version\": [\"1.4-esm_interface\", \"1.4-recom-awicm\", \"1.4-recom-mocsy-slp\", \"1.4\", \"2.0-jio\", \"2.0-o\", \"2.0-paleodyn\", \"2.0-r\", \"2.0\", \"2.1\"]}"
 
   print_matrix_values:
