@@ -2,14 +2,18 @@ name: String to Matrix
 # Given a comma (,) delimited string, transform to a matrix
 on: [push]
 jobs:
+  split_str:
+    runs-on: ubuntu-latest
+    outputs:
+      list_value: ${{ steps.split_comma_string.outputs.list_value }}
+    steps:
+      split_comma_string:
+        run: echo "::set-output name=list_value::{\"version\": [\"1.4-esm_interface\", \"1.4-recom-awicm\", \"1.4-recom-mocsy-slp\", \"1.4\", \"2.0-jio\", \"2.0-o\", \"2.0-paleodyn\", \"2.0-r\", \"2.0\", \"2.1\"]}"
 
   print_matrix_values:
+    needs: split_str
     runs-on: ubuntu-latest
     strategy:
-      matrix:
-        list_value:
-          - "A"
-          - "B"
-          - "C"
+      matrix: ${{fromJSON(needs.split_str.outputs.list_value)}}
     steps:
       - run: echo "The current value is ${{ matrix.list_value }}"
