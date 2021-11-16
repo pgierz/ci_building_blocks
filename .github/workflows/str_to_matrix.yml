@@ -1,0 +1,15 @@
+name: String to Matrix
+# Given a comma (,) delimited string, transform to a matrix
+on: [push]
+jobs:
+
+  print_matrix_values:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        list_value:
+          - "A"
+          - "B"
+          - "C"
+    steps:
+      - run: echo "The current value is ${{ matrix.list_value }}"
